@@ -1,21 +1,27 @@
 "use client";
 
 import Link from "next/link";
-import { supabase } from "@/lib/supabaseClient";
+import { useState } from "react";
+import { supabase } from "../../lib/supabaseClient";
 
 export default function LoginPage() {
+  const [error, setError] = useState<string | null>(null);
+
   const signInWithGoogle = async () => {
-    const redirectTo = `${window.location.origin}/auth/callback`;
+    setError(null);
+
+    const baseUrl =
+      process.env.NEXT_PUBLIC_SITE_URL ||
+      (typeof window !== "undefined" ? window.location.origin : "");
 
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
-      options: { redirectTo },
+      options: {
+        redirectTo: `${baseUrl}/auth/callback`,
+      },
     });
 
-    if (error) {
-      alert(error.message);
-      console.error(error);
-    }
+    if (error) setError(error.message);
   };
 
   return (
@@ -27,27 +33,27 @@ export default function LoginPage() {
 
         <h1 className="mt-6 text-2xl font-semibold">Log in</h1>
         <p className="mt-2 text-sm text-zinc-600">
-          Sign in to continue.
+          Continue with Google to sign in.
         </p>
 
         <div className="mt-8 space-y-3">
           <button
-            className="w-full rounded-2xl bg-zinc-900 px-4 py-3 text-sm font-medium text-white hover:bg-zinc-800"
-            onClick={() => alert("Email login coming next")}
-          >
-            Continue with email
-          </button>
-
-          <button
-            className="w-full rounded-2xl border border-zinc-200 px-4 py-3 text-sm font-medium hover:bg-zinc-50"
             onClick={signInWithGoogle}
+            className="w-full rounded-2xl bg-zinc-900 px-4 py-3 text-sm font-medium text-white hover:bg-zinc-800"
           >
             Continue with Google
           </button>
         </div>
 
+        {error && (
+          <p className="mt-4 rounded-xl border border-red-200 bg-red-50 p-3 text-sm text-red-700">
+            {error}
+          </p>
+        )}
+
         <div className="mt-8 rounded-2xl border border-zinc-200 p-4 text-xs text-zinc-600">
-          Next step: connect Supabase → real login → create profile.
+          If Google doesn’t open, it’s almost always URL settings (Supabase) or
+          OAuth redirect (Google Cloud).
         </div>
       </div>
     </main>
