@@ -1,65 +1,115 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <main className="min-h-screen bg-white text-zinc-900">
+      <header className="mx-auto flex max-w-5xl items-center justify-between px-6 py-6">
+        <div className="flex items-center gap-3">
+          <Image
+            src="/logo.png"
+            alt="JerseySingles"
+            width={36}
+            height={36}
+            priority
+          />
+          <span className="text-lg font-semibold">JerseySingles</span>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+
+        <nav className="flex items-center gap-3">
+          <Link
+            href="/login"
+            className="rounded-full border border-zinc-200 px-4 py-2 text-sm hover:bg-zinc-50"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            Log in
+          </Link>
+          <Link
+            href="/login"
+            className="rounded-full bg-zinc-900 px-4 py-2 text-sm text-white hover:bg-zinc-800"
           >
-            Documentation
-          </a>
+            Create account
+          </Link>
+        </nav>
+      </header>
+
+      <section className="mx-auto max-w-5xl px-6 py-14">
+        <div className="grid gap-10 md:grid-cols-2 md:items-center">
+          <div>
+            <h1 className="text-4xl font-semibold leading-tight md:text-5xl">
+              Meet people in Jersey.
+              <span className="block text-zinc-500">
+                Simple. Private. Local-first.
+              </span>
+            </h1>
+
+            <p className="mt-5 max-w-prose text-lg text-zinc-600">
+              JerseySingles is built for real people on the island — no spam, no
+              noise. Create a profile, discover matches, and chat when you both
+              like each other.
+            </p>
+
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link
+                href="/login"
+                className="rounded-full bg-zinc-900 px-6 py-3 text-sm font-medium text-white hover:bg-zinc-800"
+              >
+                Start free
+              </Link>
+              <a
+                href="#how"
+                className="rounded-full border border-zinc-200 px-6 py-3 text-sm font-medium hover:bg-zinc-50"
+              >
+                How it works
+              </a>
+            </div>
+
+            <div className="mt-8 grid grid-cols-1 gap-3 text-sm text-zinc-600 sm:grid-cols-3">
+              <div className="rounded-2xl border border-zinc-200 p-4">
+                <div className="font-medium text-zinc-900">Local-only</div>
+                <div className="mt-1">Focus on Jersey</div>
+              </div>
+              <div className="rounded-2xl border border-zinc-200 p-4">
+                <div className="font-medium text-zinc-900">Mutual chat</div>
+                <div className="mt-1">Message after match</div>
+              </div>
+              <div className="rounded-2xl border border-zinc-200 p-4">
+                <div className="font-medium text-zinc-900">Premium later</div>
+                <div className="mt-1">Extra features</div>
+              </div>
+            </div>
+          </div>
+
+          <div className="rounded-3xl border border-zinc-200 bg-zinc-50 p-6">
+            <div className="rounded-2xl bg-white p-5 shadow-sm">
+              <div className="text-sm font-medium text-zinc-900">
+                Coming next
+              </div>
+              <ul className="mt-3 space-y-2 text-sm text-zinc-600">
+                <li>• Sign up & log in</li>
+                <li>• Create profile (photos, bio, age)</li>
+                <li>• Discover (swipe-style)</li>
+                <li>• Matches + chat</li>
+                <li>• Premium limits & Stripe</li>
+              </ul>
+            </div>
+
+            <div id="how" className="mt-6 rounded-2xl border border-zinc-200 bg-white p-5">
+              <div className="text-sm font-medium text-zinc-900">
+                How it works
+              </div>
+              <ol className="mt-3 space-y-2 text-sm text-zinc-600">
+                <li>1) Create your profile</li>
+                <li>2) Like people you’re interested in</li>
+                <li>3) If it’s mutual, you can chat</li>
+              </ol>
+            </div>
+          </div>
         </div>
-      </main>
-    </div>
+      </section>
+
+      <footer className="mx-auto max-w-5xl px-6 pb-10 text-xs text-zinc-500">
+        © {new Date().getFullYear()} JerseySingles. All rights reserved.
+      </footer>
+    </main>
   );
 }
